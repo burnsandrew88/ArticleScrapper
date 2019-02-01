@@ -37,9 +37,24 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Connect to the Mongo DB (Need more explanation on this)
-mongoose.connect();
+// mongoose.connect();
 
 // Routes
+app.get("/", function (req, res){
+    res.render("index");
+});
+
+// A GET Route for scraping my news source- Ask for help with this
+app.get("/scrape", function (req, res){
+    res.render("scrape");
+    // axios.get("http://www.startribune.com/").then(function(response){
+    //     var $ = cheerio.load(response.data);
+
+    //     $().each(function(i,element){
+
+    //     })
+    // })
+})
 
 
 
