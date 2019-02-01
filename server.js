@@ -26,6 +26,16 @@ app.use(express.json());
 // Make public a static folder
 app.use(express.static("public"));
 
+// Setting up handlebars to render to main.handlebars
+app.engine(
+    "handlebars",
+    exphbrs({
+        defaultLayout:"main"
+    })
+);
+
+app.set("view engine", "handlebars");
+
 // Connect to the Mongo DB (Need more explanation on this)
 mongoose.connect();
 
