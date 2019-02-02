@@ -84,6 +84,17 @@ app.get("/scrape", function (req, res) {
     res.send("scrape complete")
 });
 
+// A GET Route to find the articles from the Mongo DB 
+app.get("/articles", function(req,res){
+    db.Article.find({})
+    .then(function(dbArticle){
+        res.json(dbArticle);
+    })
+    .catch(function(err){
+        res.json(err);
+    });
+});
+
 // A GET Route to rendering and showing my saved articles collections from Mongo DB with HBRs
 app.get("/saved", function (req, res) {
     res.render("saved");
