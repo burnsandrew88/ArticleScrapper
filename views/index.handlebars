@@ -1,19 +1,36 @@
-<div id="container text-center" style="margin-left: 10%">
+<div id="container text-center">
     <div class="row">
         <div class="col-md-12">
-            <h1>
-                <strong>News Scrapper</strong>
-            </h1>
+            <nav class="navbar navbar-dark bg-primary">
+                <h1 style="margin-left:5%;">
+                    <strong>News Scrapper</strong>
+                </h1>
+                <br>
+                <a href="/scrape">
+                    <button style="margin-left: 10%;" class="btn btn-success" id="scrapper">
+                        <strong>Scrape for Articles</strong>
+                    </button>
+                </a>
+                <a href="/articles">
+                    <button style="margin-left:2%;" type="button" class="btn btn-success">
+                        <strong>Saved Articles</strong>
+                    </button>
+                </a>
+                <br>
+                <br>
+            </nav>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
-            <a href="/scrape">
-                <button id="scrapper">Scrape for Articles</button>
-            </a>
-            <a href="/articles">
-                <button style="margin-left:2%;">Saved Articles</button>
-            </a>
+            <div id="articles">
+                {{#each articles}}
+                <h4 id="headline:{{@index}}">
+                    <strong>{{this.headline}}</strong>
+                </h4>
+                {{/each}}
+            </div>
         </div>
     </div>
+
 </div>
