@@ -9,5 +9,21 @@
             <a href="/"><button style="float-left;">Home</button></a>
         </div>
     </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div id="Article" style="padding-right:2%; padding-top:2%;">
+            {{#each Article}}
+             <h4>
+                    <strong>{{this.headline}}</strong>
+                </h4>
+                <a href="{{this.link}}">{{this.link}}</a>
+                <p>{{this.summary}}</p>
+                <hr>
+
+
+            {{/each}}
+            </div>
+        </div>
+    </div>
 
 </div>

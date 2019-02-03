@@ -11,7 +11,7 @@
                         <strong>Scrape for Articles</strong>
                     </button>
                 </a>
-                <a href="/articles">
+                <a href="/saved">
                     <button style="margin-left:2%;" type="button" class="btn btn-success">
                         <strong>Saved Articles</strong>
                     </button>
@@ -23,11 +23,16 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div id="articles">
-                {{#each articles}}
-                <h4 id="headline:{{@index}}">
+            <div id="Article" style="padding-right:2%; padding-top:2%;">
+                {{#each Article}}
+                <hr>
+                <button id="save-button" data-id={{this._id}} class="btn btn-success" style="padding: 5px 10px; float:right">Save</button> 
+                <h4>
                     <strong>{{this.headline}}</strong>
                 </h4>
+                <a href="{{this.link}}">{{this.link}}</a>
+                <p>{{this.summary}}</p>
+                <hr>
                 {{/each}}
             </div>
         </div>
