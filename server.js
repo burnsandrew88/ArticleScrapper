@@ -43,7 +43,7 @@ mongoose.connect("mongodb://localhost/ArticleScraper", { useNewUrlParser: true }
 // mongoose.connect();
 
 // Routes
-
+//(Don't need to use this render fashion anymore because the app is working to pull in Articles already in the Database)
 // app.get("/", function (req, res) {
 //     res.render("index");
 // });
@@ -92,6 +92,10 @@ app.get("/scrape", function (req, res) {
             results.link = $(this).children().children("a").attr("href");
 
             results.summary = $(this).children().children("p").text().trim();
+
+            // If statement that checks to see if Article is the DB already 
+
+            // 
 
             // create a new article using the 'result' object built from scraping
             db.Article.create(results)
