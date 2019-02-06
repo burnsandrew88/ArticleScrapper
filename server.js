@@ -61,9 +61,12 @@ app.get("/", function(req,res){
 
 // render the saved articles
 app.get("/saved", function(req, res) {
-    Article.find({"saved": true}).populate("notes").exec(function(error, data) {
+    Article.find({"saved": true})
+    .populate("notes")
+    .exec(function(error, data) {
       var hbsObject = {
-        Article: data
+        Article: data,
+        Note: data
       };
       res.render("saved", hbsObject);
     });
@@ -140,7 +143,7 @@ app.get("/articles/:id", function(req, res) {
   });
   // GET Request for grabbing saved Notes from the Mongo DB with its note
   app.get("/saved", function(req, res) {
-    Article.find({"saved": true}).populate("note").exec(function(error, data) {
+    Article.find({"saved": true}).populate("note").then(function(error, data) {
       var hbsObject = {
         Article: data
       };
@@ -171,19 +174,39 @@ app.get("/articles/:id", function(req, res) {
 // Save an article
   app.post("/articles/saved/:id", function(req, res) {
     // Use the article id to find and update its saved boolean
-    Article.findOneAndUpdate({ "_id": req.params.id }, { "saved": true})
+    Article.findOneAndUpdate({ _id: req.params.id }, { saved: true})
     // Execute the above query
-    .exec(function(err, doc) {
+    .then(function(err, article) {
       // Log any errors
       if (err) {
         console.log(err);
       }
       else {
         // Or send the document to the browser
-        res.send(doc);
+        res.send(article);
       }
     });
 });
+
+// Delete an Article
+
+app.post("/articles/delete/:id", function(req, res) {
+  // Use the article id to find and update its saved boolean
+  Article.findOneAndUpdate({ _id: req.params.id }, {"saved": false, "note": []})
+  // Execute the above query
+  .then(function(err, article) {
+    // Log any errors
+    if (err) {
+      console.log(err);
+    }
+    else {
+      // Or send the document to the browser
+      res.send(article);
+    }
+  });
+});
+
+
 
 
 
