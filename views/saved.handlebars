@@ -13,15 +13,17 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div id="Article" style="padding-right:2%; padding-top:2%;">
+            <div class="articles" id="Article" style="padding-right:2%; padding-top:2%;">
                 {{#each Article}}
                 <hr>
+                <button id="save-button" data-id={{this._id}} class="btn btn-success" style="padding: 5px 10px; float:right">Notes</button>
                 <h4>
                     <strong>{{this.headline}}</strong>
                 </h4>
                 <a href="{{this.link}}">{{this.link}}</a>
                 <p>{{this.summary}}</p>
-                <hr> 
+                 <hr>
+                 
                 {{/each}}
             </div>
         </div>
