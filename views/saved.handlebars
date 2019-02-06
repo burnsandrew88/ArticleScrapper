@@ -18,7 +18,7 @@
             <div class="articles" id="Article" style="padding-right:2%; padding-top:2%;">
                 {{#each Article}}
                 <hr>
-                <button id="notes-button" data-id={{this._id}} class="btn btn-success" style="padding: 5px 10px">
+                <button id="notes-button" data-id={{this._id}} class="btn btn-success" style="padding: 5px 10px; float:right;">
                     <strong> Add Notes</strong>
                 </button>
                 <button id="delete-button" data-id={{this._id}} class="btn btn-danger" style="padding: 5px 10px; float:right">
@@ -29,15 +29,18 @@
                 </h4>
                 <a href="{{this.link}}">{{this.link}}</a>
                 <p>{{this.summary}}</p>
+                <hr>
                 <div class="card">
                     <div class="card-body">
-                        {{note}}
+                        <h3>{{note._id}}</h3>
+                        <h5 class="card-title">{{note.title}}</h5>
+                        <p class="card-text">{{note.body}}</p>
                     </div>
                 </div>
                 <br>
                 <br>
                 <div id="notes-entry" class="col-md-5 notes-display"></div>
-                <hr> {{/each}}
+                 {{/each}}
             </div>
         </div>
     </div>

@@ -21,6 +21,7 @@ var app = express();
 // Configure middleware
 
 //Use morgan logger for logging requests
+mongoose.set('useFindAndModify', false);
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -62,7 +63,7 @@ app.get("/", function(req,res){
 // render the saved articles
 app.get("/saved", function(req, res) {
     Article.find({"saved": true})
-    .populate("notes")
+    .populate("note")
     .exec(function(error, data) {
       var hbsObject = {
         Article: data,
@@ -155,7 +156,7 @@ app.get("/articles/:id", function(req, res) {
 
   app.post("/articles/:id", function(req, res) {
     // Create a new note and pass the req.body to the entry
-    db.Note.create(req.body)
+    db.Note.create(req.body.title, req.body.body)
       .then(function(dbNote) {
         // If a Note was created successfully, find one Article with an `_id` equal to `req.params.id`. Update the Article to be associated with the new Note
         // { new: true } tells the query that we want it to return the updated User -- it returns the original by default
@@ -192,7 +193,7 @@ app.get("/articles/:id", function(req, res) {
 
 app.post("/articles/delete/:id", function(req, res) {
   // Use the article id to find and update its saved boolean
-  Article.findOneAndUpdate({ _id: req.params.id }, {"saved": false, "note": []})
+  Article.findOneAndUpdate({ _id: req.params.id }, {saved: false})
   // Execute the above query
   .then(function(err, article) {
     // Log any errors
