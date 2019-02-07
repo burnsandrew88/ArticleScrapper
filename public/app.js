@@ -1,5 +1,5 @@
 // Saving an article to the Database
-$("#save-button").on("click", function() {
+$(".save-button").on("click", function() {
     var thisId = $(this).attr("data-id");
     $.ajax({
         method: "POST",
@@ -9,7 +9,7 @@ $("#save-button").on("click", function() {
     })
 });
 // Delete an article
-$("#delete-button").on("click", function(err,res) {
+$(".delete-button").on("click", function(err,res) {
     var thisId = $(this).attr("data-id");
     $.ajax({
         method: "POST",
@@ -20,7 +20,7 @@ $("#delete-button").on("click", function(err,res) {
     })
 });
 // Whenever someone clicks the Notes Button, Append the Notes for the Article
-$("#notes-button").on("click", function() {
+$(".notes-button").on("click", function() {
     // Empty the notes from the note section
     $(".notes-display").empty();
     // Save the id from the.notes-display button tag
@@ -62,12 +62,12 @@ $("#notes-button").on("click", function() {
     $.ajax({
       method: "POST",
       url: "/articles/" + thisId,
-      Data: {
+      Data: [{
         // Value taken from title input
-        title: $("#titleinput").val(),
+        title: $("#titleent").val().trim(),
         // Value taken from note textarea
-        body: $("#bodyinput").val()
-      },
+        body: $("#bodyinputent").val()
+      }],
     })
       // With that done
       .then(function(data) {
@@ -78,8 +78,8 @@ $("#notes-button").on("click", function() {
       });
   
     // Also, remove the values entered in the input and textarea for note entry
-    $("#titleinput").val("");
-    $("#bodyinput").val("");
+    $("#titleent").val("");
+    $("#bodyinputent").val("");
   });
   
   
